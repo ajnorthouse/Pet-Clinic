@@ -43,10 +43,10 @@ public class CustomerController {
 		
 		//checks for pet list to decide on which constructor to use
 		if (c.getPets() != null) {
-			created = new Customer(c.getId(), c.getName(), c.getPhoneNumber(),
+			created = new Customer(c.getCustomerID(), c.getName(), c.getPhoneNumber(),
 									c.getEmailAddress(), c.getCity(), c.getPets());
 		} else {
-			created = new Customer(c.getId(), c.getName(), c.getPhoneNumber(),
+			created = new Customer(c.getCustomerID(), c.getName(), c.getPhoneNumber(),
 									c.getEmailAddress(), c.getCity());
 		}
 		
@@ -129,14 +129,14 @@ public class CustomerController {
 	@PutMapping("/update/customer")
 	public @ResponseBody String updateCustomer(@RequestBody Customer cust) {
 		
-		Optional<Customer> found = repo.findById(cust.getId());
+		Optional<Customer> found = repo.findById(cust.getCustomerID());
 		
 		if(found.isPresent()) {
 			repo.save(cust);
 			return "Saved: " + cust.toString();
 		}
 		else {
-			return "Could not update customer with id = " + cust.getId();
+			return "Could not update customer with id = " + cust.getCustomerID();
 		}
 		
 	}
