@@ -2,12 +2,15 @@ package com.cognixia.jump.springcloud.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.springcloud.model.Pet;
@@ -18,41 +21,62 @@ import com.cognixia.jump.springcloud.service.AccountService;
 @RestController
 public class CustomerController {
 	
+	//repos and services
 	@Autowired
 	CustomerRespository repo;
-	
 	@Autowired
 	AccountService acctService;
 	
-	@GetMapping("/helloCustomer")
-	public String helloCustomer() {
-		return "Hello from Customer Service - Controller!!";
-	}
-	
-	@GetMapping("/customer/{id}")
-	public Customer findByCustomerId(@PathVariable Integer id) {
-		return repo.findByCustomerId(id);
-	}
-	
-	@PostMapping("/addCustomer")
-	public Optional<Customer> saveCustomer(@RequestBody Customer c) {
-		Optional<Customer> custAdd = Optional.of(c);
-		if(custAdd.isPresent()) {
-			repo.save(custAdd.get());
+	//CREATE
+	@PostMapping("/customer")
+	public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer c) {
+		//temp object
+		Customer created;
+		
+		
+		//checks for pet list to decide on which constructor to use
+		if (c.getPets() != null) {
+			created = new Customer(c.getId(), c.getName(), c.getPhoneNumber(),
+									c.getEmailAddress(), c.getCity(), c.getPets());
+		} else {
+			created = new Customer(c.getId(), c.getName(), c.getPhoneNumber(),
+									c.getEmailAddress(), c.getCity());
 		}
-		return custAdd;
+		
+		//adds customer and returns result
+		repo.save(created);
+		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
+	@PostMapping("/customer/{id}/pet")
+	public Pet saveAccount(@PathVariable Integer id, @Valid @RequestBody Pet pet) {
+		//TODO: implement adding a SINGLE pet
+		return acctService.save(pet);
+	}
+	//TODO: implement adding a list of pets
 	
-	@PostMapping("/account")
-	public Pet saveAccount(@RequestBody Pet acct) {
-		return acctService.save(acct);
-	}
-//	
-//	@PostMapping("/addAccount")
-//	public Optional<Account> saveAccount(@RequestBody Account a) {
-//		Optional<Account> acctAdd = Optional.of(a);
-//		if(acctAdd.isPresent()) {
-//			repo.save(acctAdd.get());
-//		}
-//		return acctAdd;
-	}
+	
+	
+	//READ
+	//TODO: implement finding all customers 
+	//TODO: implement finding customer by Id
+	//TODO: implement finding customer by name
+	//TODO: implement finding customer by phone number
+	//TODO: implement finding customer by email address
+	//TODO: implement finding customer by city
+	//TODO: implement return all pets by customer id
+	
+	
+	
+	//UPDATE
+	//TODO: implement update customer name
+	//TODO: implement update customer phone number
+	//TODO: implement update customer email address
+	//TODO: implement update customer city
+	//TODO: pets??? 
+	
+	
+	
+	//DELETE
+	//TODO: implement delete customer by id
+	
+}
