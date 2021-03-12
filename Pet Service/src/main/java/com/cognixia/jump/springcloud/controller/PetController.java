@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.springcloud.model.Pet;
+import com.cognixia.jump.springcloud.repository.PetRepository;
 import com.cognixia.jump.springcloud.model.Customer;
 
 @RestController
@@ -29,8 +30,6 @@ public class PetController {
 	//repos and services
 	@Autowired
 	PetRepository repo;
-	@Autowired
-	PetService acctService;
 	
 	//CREATE
 	@PostMapping("/customer")
