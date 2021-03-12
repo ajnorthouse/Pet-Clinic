@@ -14,12 +14,12 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerService custService;
 	
 	
-	@GetMapping("/account/{accountId}")
+	@GetMapping("/customer/{customerId}")
 	public Customer findByCustomerId(Integer customerId) {
 		return null;
 	}
 	
-	@PostMapping("/account")
+	@PostMapping("/customer")
 	public Customer save(Customer cust) {
 		return null;
 	}

@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.cognixia.jump.springcloud.model.Customer;
 
 @Service
-@FeignClient("account-service")
+@FeignClient("customer-service")
 public interface CustomerService {
 	
-	@GetMapping("/account/{accountId}")
+	@GetMapping("/customer/{customerId}")
 	public Customer findByCustomerId(Integer customerId);
 	
-	@PostMapping("/account")
+	@PostMapping("/customer")
 	public Customer save(Customer cust);
 
 }
