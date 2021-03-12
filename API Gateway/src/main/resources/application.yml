@@ -19,8 +19,8 @@ zuul:
   prefix: /api
   routes:
     customer-service:
-      path: /account/**
+      path: /customer/**
       service-id: customer-service
     pet-service:
-      path: /customer/**
+      path: /pet/**
       service-id: pet-service

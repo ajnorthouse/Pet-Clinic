@@ -14,13 +14,13 @@ public class PetServiceImpl implements PetService {
 	PetService acctService;
 	
 	
-	@GetMapping("/pet/{petId}")
-	public Pet findBypetId(Integer petId) {
+	@GetMapping("/pet/{accountId}")
+	public Pet findByPetId(Integer petId) {
 		return null;
 	}
 	
 	@PostMapping("/pet")
-	public Pet save(Pet acct) {
+	public Pet save(Pet pet) {
 		return null;
 	}
 

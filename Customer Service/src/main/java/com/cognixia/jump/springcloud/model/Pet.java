@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Pet implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 
 	//class variables

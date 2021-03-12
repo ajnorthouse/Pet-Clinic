@@ -12,7 +12,7 @@ import com.cognixia.jump.springcloud.model.Pet;
 public interface PetService {
 	
 	@GetMapping("/pet/{petId}")
-	public Pet findBypetId(Integer petId);
+	public Pet findByPetId(Integer petId);
 	
 	@PostMapping("/pet")
 	public Pet save(Pet acct);
