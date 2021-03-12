@@ -11,10 +11,10 @@ import com.cognixia.jump.springcloud.model.Pet;
 public class PetServiceImpl implements PetService {
 	
 	@Autowired
-	PetService acctService;
+	PetService petService;
 	
 	
-	@GetMapping("/pet/{accountId}")
+	@GetMapping("/pet/{petId}")
 	public Pet findByPetId(Integer petId) {
 		return null;
 	}
