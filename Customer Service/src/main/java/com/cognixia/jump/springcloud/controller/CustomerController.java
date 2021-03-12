@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.springcloud.model.Pet;
@@ -73,8 +75,20 @@ public class CustomerController {
 	//TODO: implement update customer email address
 	//TODO: implement update customer city
 	//TODO: pets??? 
-	
-	
+	@PutMapping("/update/customer")
+	public @ResponseBody String updateCustomer(@RequestBody Customer cust) {
+		
+		Optional<Customer> found = repo.findById(cust.getId());
+		
+		if(found.isPresent()) {
+			repo.save(cust);
+			return "Saved: " + cust.toString();
+		}
+		else {
+			return "Could not update customer with id = " + cust.getId();
+		}
+		
+	}
 	
 	//DELETE
 	//TODO: implement delete customer by id
