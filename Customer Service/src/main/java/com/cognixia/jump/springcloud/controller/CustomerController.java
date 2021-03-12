@@ -54,12 +54,6 @@ public class CustomerController {
 		repo.save(created);
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
-	@PostMapping("/customer/{id}/pet")
-	public Pet saveAccount(@PathVariable Integer id, @Valid @RequestBody Pet pet) {
-		//TODO: implement adding a SINGLE pet
-		return acctService.save(pet);
-	}
-	//TODO: implement adding a list of pets
 	
 	
 	
