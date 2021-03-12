@@ -1,58 +1,66 @@
 package com.cognixia.jump.springcloud.controller;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cognixia.jump.springcloud.model.Account;
-import com.cognixia.jump.springcloud.model.Customer;
-import com.cognixia.jump.springcloud.repository.CustomerRespository;
-import com.cognixia.jump.springcloud.service.AccountService;
+import com.cognixia.jump.springcloud.model.Pet;
+import com.cognixia.jump.springcloud.repository.PetRepository;
+import com.cognixia.jump.springcloud.service.PetService;
 
 @RestController
-public class CustomerController {
+public class PetController {
+
+	@Autowired
+	PetService petservice;
 	
 	@Autowired
-	CustomerRespository repo;
+	private PetRepository petRepository;
 	
-	@Autowired
-	AccountService acctService;
-	
-	@GetMapping("/helloCustomer")
+	@GetMapping("/hellopet")
 	public String helloCustomer() {
-		return "Hello from Customer Service - Controller!!";
+		return "Hello from Pet Service - Controller!!";
 	}
 	
-	@GetMapping("/customer/{id}")
-	public Customer findByCustomerId(@PathVariable Integer id) {
-		return repo.findByCustomerId(id);
+	@GetMapping(value = "/pet/{petId}")
+	public Pet findByPetId(@PathVariable Integer petId) {
+	
+		return petRepository.findByPetId(petId);
+	}
+	@GetMapping(value = "/pet/pet-type/{type}")
+	public List<Pet> findByPetType(@PathVariable String type){
+	
+		return petRepository.findAllByPetType(type);
+	}
+	@GetMapping(value = "/pet/customer/{customer}")
+	public List<Pet> findByCustomer(@PathVariable Integer customer) {
+	
+		return petRepository.findAllByCustomerId(customer);
+	}
+	@GetMapping(value = "/pet")
+	public Iterable<Pet> all(){
+		
+		return petRepository.findAll();
+	}
+	@PostMapping(value = "/pet")
+	public Pet save(@RequestBody Pet pet) {
+		return petRepository.save(pet);
+	}
+	@PutMapping(value = "/pet")
+	public Pet update(@RequestBody Pet pet) {
+		
+		return petRepository.save(pet);
+	}
+	@DeleteMapping(value = "/pet")
+	public void delete(@RequestBody Pet pet) {
+		
+		petRepository.delete(pet);
 	}
 	
-	@PostMapping("/addCustomer")
-	public Optional<Customer> saveCustomer(@RequestBody Customer c) {
-		Optional<Customer> custAdd = Optional.of(c);
-		if(custAdd.isPresent()) {
-			repo.save(custAdd.get());
-		}
-		return custAdd;
-	}
-	
-	@PostMapping("/account")
-	public Account saveAccount(@RequestBody Account acct) {
-		return acctService.save(acct);
-	}
-//	
-//	@PostMapping("/addAccount")
-//	public Optional<Account> saveAccount(@RequestBody Account a) {
-//		Optional<Account> acctAdd = Optional.of(a);
-//		if(acctAdd.isPresent()) {
-//			repo.save(acctAdd.get());
-//		}
-//		return acctAdd;
-	}
+}

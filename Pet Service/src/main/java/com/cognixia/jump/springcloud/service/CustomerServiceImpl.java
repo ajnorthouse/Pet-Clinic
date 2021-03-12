@@ -5,23 +5,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.cognixia.jump.springcloud.model.Account;
+import com.cognixia.jump.springcloud.model.Customer;
 
 @Component
-public class AccountServiceImpl implements AccountService {
+public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
-	AccountService acctService;
+	CustomerService custService;
 	
 	
 	@GetMapping("/account/{accountId}")
-	public Account findByAccountId(Integer accountId) {
+	public Customer findByCustomerId(Integer customerId) {
 		return null;
 	}
 	
 	@PostMapping("/account")
-	public Account save(Account acct) {
+	public Customer save(Customer cust) {
 		return null;
 	}
-
+	
 }
