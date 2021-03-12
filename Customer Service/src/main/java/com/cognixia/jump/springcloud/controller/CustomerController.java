@@ -1,5 +1,6 @@
 package com.cognixia.jump.springcloud.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -57,6 +58,10 @@ public class CustomerController {
 	
 	
 	//READ
+	@GetMapping("/customers")
+	public List<Customer> getAllCustomer() {
+		return repo.findAll();
+	}
 	//TODO: implement finding all customers 
 	//TODO: implement finding customer by Id
 	//TODO: implement finding customer by name
