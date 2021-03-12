@@ -30,7 +30,7 @@ public class Customer implements Serializable {
 	String Zipcode;
 	
 	@Transient
-	List<Account> accts;
+	List<Pet> accts;
 	
 	public Customer() {
 		super();
@@ -76,11 +76,11 @@ public class Customer implements Serializable {
 		Zipcode = zipcode;
 	}
 
-	public List<Account> getAccts() {
+	public List<Pet> getAccts() {
 		return accts;
 	}
 
-	public void setAccts(List<Account> accts) {
+	public void setAccts(List<Pet> accts) {
 		this.accts = accts;
 	}
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cognixia.jump.springcloud.model.Account;
+import com.cognixia.jump.springcloud.model.Pet;
 import com.cognixia.jump.springcloud.model.Customer;
 import com.cognixia.jump.springcloud.repository.CustomerRespository;
 import com.cognixia.jump.springcloud.service.AccountService;
@@ -44,7 +44,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/account")
-	public Account saveAccount(@RequestBody Account acct) {
+	public Pet saveAccount(@RequestBody Pet acct) {
 		return acctService.save(acct);
 	}
 //	

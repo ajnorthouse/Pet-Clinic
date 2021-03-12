@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Account implements Serializable{
+public class Pet implements Serializable{
 	
 	/**
 	 * 
@@ -33,11 +33,11 @@ public class Account implements Serializable{
 	@Column(name="BANK")
 	String bank;
 	
-	public Account() {
+	public Pet() {
 		super();
 	}
 	
-	public Account(Integer accountId, Double balance, Integer customerId, String accountType, String branchCode,
+	public Pet(Integer accountId, Double balance, Integer customerId, String accountType, String branchCode,
 			String bank) {
 		super();
 		this.accountId = accountId;
