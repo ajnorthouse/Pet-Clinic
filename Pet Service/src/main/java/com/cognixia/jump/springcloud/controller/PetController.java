@@ -123,53 +123,58 @@ public class PetController {
 	
 	
 	//UPDATE
-	@PutMapping("/update/customer")
-	public @ResponseBody String updateCustomer(@RequestBody Customer cust) {
+	@PutMapping("/update/pet")
+	public @ResponseBody String updatePet(@RequestBody Pet pet) {
 		
-		Optional<Customer> found = repo.findById(cust.getCustomerId());
+		Optional<Pet> found = repo.findById(pet.getPetId());
 		
 		if(found.isPresent()) {
-			repo.save(cust);
-			return "Saved: " + cust.toString();
+			repo.save(pet);
+			return "Saved: " + pet.toString();
 		}
 		else {
-			return "Could not update customer with id = " + cust.getCustomerId();
+			return "Could not update customer with id = " + pet.getPetId();
 		}
 		
 	}
 	//patch mapping and helpers:
-	@PatchMapping("customer")
-	public @ResponseBody String[] updateCustomer(@RequestBody Map<String, String> custuUpdate) {
+	@PatchMapping("pet")
+	public @ResponseBody String[] patchPet(@RequestBody Map<String, String> petUpdate) {
 		// collect id from map and attempt to get matching Customer
-		long id = Long.parseLong(custuUpdate.getOrDefault("id", "-1"));
-		Optional<Customer> found = repo.findById((int) id);
+		Integer id = Integer.parseInt(petUpdate.getOrDefault("petId", "-1"));
+		Optional<Pet> found = repo.findByPetId(id);
 		
 		// update logic
 		if (id != -1L && found.isPresent()) {
 			//collects the update values from the map
-			Customer toUpdate = found.get();
-			String newName = custuUpdate.get("name");
-			String newPhoneNumber = custuUpdate.get("phoneNumber");
-			String newEmailAddress = custuUpdate.get("emailAddress");
-			String newCity = custuUpdate.get("city");
+			Pet toUpdate = found.get();
+			String newName = petUpdate.get("name");
+			String newType = petUpdate.get("type");
+			Integer newAge = Integer.parseInt(petUpdate.getOrDefault("age", "-1"));
+			Double newWeight = Double.parseDouble(petUpdate.getOrDefault("weight", "-1.0"));
+			Integer newCustomerId = Integer.parseInt(petUpdate.getOrDefault("customerId", "-1"));
 			
 			List<String> response = new ArrayList<String>();
 			
 			//updates name
 			if (newName != null) {
-				response.add(updateCustomerName(toUpdate, newName));
+				response.add(updatePetName(toUpdate, newName));
 			}
-			//updates phone number
-			if (newPhoneNumber != null) {
-				response.add(updateCustomerPhoneNumber(toUpdate, newPhoneNumber));
+			//updates type
+			if (newType != null) {
+				response.add(updatePetType(toUpdate, newType));
 			}
-			//updates email address
-			if (newEmailAddress != null) {
-				response.add(updateCustomerEmailAddress(toUpdate, newEmailAddress));
+			//updates age
+			if (newAge != -1) {
+				response.add(updatePetAge(toUpdate, newAge));
 			}
-			//updates city
-			if (newCity != null) {
-				response.add(updateCustomerCity(toUpdate, newCity));
+			//updates weight
+			if (newWeight != -1.0) {
+				response.add(updatePetWeight(toUpdate, newWeight));
+			}
+			//updates customerId
+			if (newCustomerId != -1) {
+				response.add(updatePetCustomerId(toUpdate, newCustomerId));
 			}
 			
 			//returns updated strings
@@ -178,44 +183,49 @@ public class PetController {
 		} 
 		// failed to find Customer logic
 		else {
-			return new String[]{"Could not update city of Customer with id: " + id};
+			return new String[]{"Could not update Pet with id: " + id};
 		}
 	}
-	String updateCustomerName(Customer Customer, String newName) {
-		String oldName = Customer.getName();
-		Customer.setName(newName);
+	String updatePetName(Pet pet, String newName) {
+		String oldName = pet.getName();
+		pet.setName(newName);
 		return "Previous name: " + oldName + ", New: " + newName;
 	}
-	String updateCustomerPhoneNumber(Customer Customer, String newPhoneNumber) {
-		String oldPhoneNumber = Customer.getPhoneNumber();
-		Customer.setPhoneNumber(newPhoneNumber);
-		return "Old phone number: " + oldPhoneNumber + ", New: " + newPhoneNumber;
+	String updatePetType(Pet pet, String newType) {
+		String oldType = pet.getType();
+		pet.setType(newType);
+		return "Old type: " + oldType + ", New: " + newType;
 	}
-	String updateCustomerEmailAddress(Customer Customer, String newEmailAddress) {
-		String oldEmail = Customer.getEmailAddress();
-		Customer.setEmailAddress(newEmailAddress);
-		return "Old Email: " + oldEmail + ", New: " + newEmailAddress;
+	String updatePetAge(Pet pet, Integer newAge) {
+		Integer oldAge = pet.getAge();
+		pet.setAge(newAge);
+		return "Old Age: " + oldAge + ", New: " + newAge;
 	}
-	String updateCustomerCity(Customer Customer, String newCity) {
-		String oldCity = Customer.getCity();
-		Customer.setCity(newCity);
-		return "Previous City " + oldCity + ", New: " + newCity;
+	String updatePetWeight(Pet pet, Double newWeight) {
+		Double oldWeight = pet.getWeight();
+		pet.setWeight(newWeight);
+		return "Previous Weight: " + oldWeight + ", Weight: " + newWeight;
+	}
+	String updatePetCustomerId(Pet pet, Integer newCustomerId) {
+		Integer oldCustomerId = pet.getCustomerId();
+		pet.setCustomerId(newCustomerId);
+		return "Previous Customer Id: " + oldCustomerId + ", New: " + newCustomerId;
 	}
 	
 	
 	
 	//DELETE
-	@DeleteMapping("/delete/customer/{id}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
+	@DeleteMapping("/delete/pet/{id}")
+	public ResponseEntity<String> deletePet(@PathVariable Integer id) {
 		
-		Optional<Customer> found = repo.findById((int) id);
+		Optional<Pet> found = repo.findByPetId(id);
 		
 		if(found.isPresent()) {
 			repo.deleteById((int) id);
-			return ResponseEntity.status(200).body("Deleted customer with id = " + id);
+			return ResponseEntity.status(200).body("Deleted pet with id = " + id);
 		}
 		else {
-			return ResponseEntity.status(400).body("Customer with id = " + id + " not found.");
+			return ResponseEntity.status(400).body("Pet with id = " + id + " not found.");
 		}
 		
 	}
