@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.springcloud.model.Pet;
 import com.cognixia.jump.springcloud.repository.PetRepository;
-import com.cognixia.jump.springcloud.model.Customer;
 
 @RestController
 public class PetController {
@@ -173,7 +172,7 @@ public class PetController {
 	String updatePetCustomerId(Pet pet, Integer newCustomerId) {
 		Integer oldCustomerId = pet.getCustomerId();
 		pet.setCustomerId(newCustomerId);
-		return "Previous Customer Id: " + oldCustomerId + ", New: " + newCustomerId;
+		return "Previous Pet Id: " + oldCustomerId + ", New: " + newCustomerId;
 	}
 	
 	
