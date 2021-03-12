@@ -33,19 +33,13 @@ public class PetController {
 	
 	//CREATE
 	@PostMapping("/customer")
-	public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer c) {
+	public ResponseEntity<Pet> savePet(@Valid @RequestBody Pet p) {
 		//temp object
-		Customer created;
+		Pet created;
 		
 		
-		//checks for pet list to decide on which constructor to use
-		if (c.getPets() != null) {
-			created = new Customer(c.getCustomerId(), c.getName(), c.getPhoneNumber(),
-									c.getEmailAddress(), c.getCity(), c.getPets());
-		} else {
-			created = new Customer(c.getCustomerId(), c.getName(), c.getPhoneNumber(),
-									c.getEmailAddress(), c.getCity());
-		}
+		created = new Pet(p.getPetId(), p.getName(), p.getType(),
+							p.getAge(), p.getWeight(), p.getCustomerId());
 		
 		//adds customer and returns result
 		repo.save(created);
@@ -55,69 +49,39 @@ public class PetController {
 	
 	
 	//READ
-	@GetMapping("/customers")
-	public List<Customer> getAllCustomer() {
+	@GetMapping("/pets")
+	public List<Pet> getAllPets() {
 		return repo.findAll();
 	}
-	@GetMapping("/customer/{id}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
-		Optional<Customer> found = repo.findById(id);
+	@GetMapping("/pet/{id}")
+	public ResponseEntity<Pet> getPetById(@PathVariable Integer id) {
+		Optional<Pet> found = repo.findByPetId(id);
 		
 		if (found.isEmpty()) {
-			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new Pet(), HttpStatus.NOT_FOUND);
 		}
 		
 		return new ResponseEntity<>(found.get(), HttpStatus.OK);
 	}
-	@GetMapping("/customer/name/{name}")
-	public ResponseEntity<Customer> getCustomerByName(@PathVariable String name) {
-		Optional<Customer> found = repo.findByName(name);
-		
-		if (found.isEmpty()) {
-			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	@GetMapping("/pets/name/{name}")
+	public List<Pet> getPetsByName(@PathVariable String name) {
+		return repo.findAllByName(name);
 	}
-	@GetMapping("/customer/phone/{phone}")
-	public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phone) {
-		Optional<Customer> found = repo.findByPhoneNumber(phone);
-		
-		if (found.isEmpty()) {
-			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	@GetMapping("/pets/type/{type}")
+	public List<Pet> getPetsByType(@PathVariable String type) {
+		return repo.findAllByPetType(type);
 	}
-	@GetMapping("/customer/email/{email}")
-	public ResponseEntity<Customer> getCustomerByEmailAddress(@PathVariable String email) {
-		Optional<Customer> found = repo.findByEmailAddress(email);
-		
-		if (found.isEmpty()) {
-			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	@GetMapping("/pets/age/{age}")
+	public List<Pet> getPetsByAge(@PathVariable Integer age) {
+		return repo.findAllByAge(age);
 	}
-	@GetMapping("/customer/city/{city}")
-	public ResponseEntity<Customer> getCustomerByCity(@PathVariable String city) {
-		Optional<Customer> found = repo.findByCity(city);
-		
-		if (found.isEmpty()) {
-			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	@GetMapping("/pets/weight/{weight}")
+	public List<Pet> getPetsByWeight(@PathVariable Double weight) {
+		return repo.findAllByWeight(weight);
 	}
-	@GetMapping("/customer/{id}/pets")
-	public ResponseEntity<List<Pet>> getCustomerPetsById(@PathVariable Integer id) {
-		Optional<Customer> found = repo.findById(id);
-		
-		if (found.isEmpty()) {
-			return new ResponseEntity<>(new ArrayList<Pet>(), HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<>(found.get().getPets(), HttpStatus.OK);
+	@GetMapping("/pets/customerId/{customerId}")
+	public List<Pet> getPetByCity(@PathVariable Integer customerId) {
+		return repo.findAllByCustomerId(customerId);
 	}
 	
 	
@@ -126,7 +90,7 @@ public class PetController {
 	@PutMapping("/update/pet")
 	public @ResponseBody String updatePet(@RequestBody Pet pet) {
 		
-		Optional<Pet> found = repo.findById(pet.getPetId());
+		Optional<Pet> found = repo.findByPetId(pet.getPetId());
 		
 		if(found.isPresent()) {
 			repo.save(pet);

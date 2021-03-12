@@ -13,9 +13,9 @@ public interface PetRepository extends JpaRepository<Pet, Integer>{
 	
 	List<Pet> findAll();
 	Optional<Pet> findByPetId(Integer petId);
-	Optional<Pet> findByName(String name);
-	Optional<Pet> findByAge(Integer age);
-	Optional<Pet> findByWeight(Double weight);
+	List<Pet> findAllByName(String name);
+	List<Pet> findAllByAge(Integer age);
+	List<Pet> findAllByWeight(Double weight);
 	List<Pet> findAllByPetType(String type);
 	List<Pet> findAllByCustomerId(Integer customerId);
 
