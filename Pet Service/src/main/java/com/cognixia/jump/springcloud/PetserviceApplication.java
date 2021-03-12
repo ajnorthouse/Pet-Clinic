@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 @EnableEurekaClient
-public class CustomerserviceApplication {
+public class PetserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CustomerserviceApplication.class, args);
+		SpringApplication.run(PetserviceApplication.class, args);
 	}
 
 }
