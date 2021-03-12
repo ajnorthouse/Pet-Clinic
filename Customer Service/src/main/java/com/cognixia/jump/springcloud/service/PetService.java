@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.cognixia.jump.springcloud.model.Pet;
 
 @Service
-@FeignClient("account-service")
-public interface AccountService {
+@FeignClient("pet-service")
+public interface PetService {
 	
-	@GetMapping("/account/{accountId}")
-	public Pet findByAccountId(Integer accountId);
+	@GetMapping("/pet/{petId}")
+	public Pet findByPetId(Integer petId);
 	
-	@PostMapping("/account")
+	@PostMapping("/pet")
 	public Pet save(Pet acct);
 
 }

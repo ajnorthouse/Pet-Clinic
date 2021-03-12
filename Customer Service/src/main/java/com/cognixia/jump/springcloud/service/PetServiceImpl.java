@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.cognixia.jump.springcloud.model.Pet;
 
 @Component
-public class AccountServiceImpl implements AccountService {
+public class PetServiceImpl implements PetService {
 	
 	@Autowired
-	AccountService acctService;
+	PetService acctService;
 	
 	
-	@GetMapping("/account/{accountId}")
-	public Pet findByAccountId(Integer accountId) {
+	@GetMapping("/pet/{accountId}")
+	public Pet findByPetId(Integer petId) {
 		return null;
 	}
 	
-	@PostMapping("/account")
-	public Pet save(Pet acct) {
+	@PostMapping("/pet")
+	public Pet save(Pet pet) {
 		return null;
 	}
 
