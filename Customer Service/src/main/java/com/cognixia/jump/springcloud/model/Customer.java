@@ -37,7 +37,7 @@ public class Customer implements Serializable {
 	
 	//constructors
 	public Customer() {
-		this.id = 0;
+		this.id = -1;
 		this.name = "N/A";
 		this.phoneNumber = "N/A";
 		this.emailAddress = "N/A";
@@ -46,7 +46,6 @@ public class Customer implements Serializable {
 	}
 	
 	public Customer(Integer id, String name, String phoneNumber, String emailAddress, String city) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
@@ -56,7 +55,6 @@ public class Customer implements Serializable {
 	}
 	
 	public Customer(Integer id, String name, String phoneNumber, String emailAddress, String city, List<Pet> pets) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;

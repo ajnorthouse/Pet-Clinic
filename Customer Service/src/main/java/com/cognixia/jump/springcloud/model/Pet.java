@@ -8,94 +8,87 @@ import javax.persistence.Id;
 
 @Entity
 public class Pet implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
+	//class variables
 	@Id
-	@Column(name="ACCOUNTID")
-	Integer accountId;
+	@Column(name="PETID")
+	Integer id;
+	@Column(name="NAME")
+	String name;
+	@Column(name="AGE")
+	Integer age;
+	@Column(name="WEIGHT")
+	Double weight;
 	
-	@Column(name="BALANCE")
-	Double balance;
-	
+	//foreign entity
 	@Column(name="CUSTOMERID")
 	Integer customerId;
 	
-	@Column(name="ACCOUNTTYPE")
-	String accountType;
 	
-	@Column(name="BRANCHCODE")
-	String branchCode;
 	
-	@Column(name="BANK")
-	String bank;
-	
+	//constructors
 	public Pet() {
-		super();
+		this.id = -1;
+		this.name = "N/A";
+		this.age = -1;
+		this.weight = -1.0;
+		this.customerId = -1;
 	}
-	
-	public Pet(Integer accountId, Double balance, Integer customerId, String accountType, String branchCode,
-			String bank) {
-		super();
-		this.accountId = accountId;
-		this.balance = balance;
+	public Pet(Integer id, String name, Integer age, Double weight, Integer customerId) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.weight = weight;
 		this.customerId = customerId;
-		this.accountType = accountType;
-		this.branchCode = branchCode;
-		this.bank = bank;
 	}
 
-	public Integer getAccountId() {
-		return accountId;
+	
+	//getters
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public Integer getId() {
+		return id;
 	}
-
-	public Double getBalance() {
-		return balance;
+	public String getName() {
+		return name;
 	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
+	public Integer getAge() {
+		return age;
 	}
-
+	public Double getWeight() {
+		return weight;
+	}
 	public Integer getCustomerId() {
 		return customerId;
 	}
 
+	
+	//setters
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
-
-	public String getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
-	}
-
-	public String getBranchCode() {
-		return branchCode;
-	}
-
-	public void setBranchCode(String branchCode) {
-		this.branchCode = branchCode;
-	}
-
-	public String getBank() {
-		return bank;
-	}
-
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
-
+	
+	
+	//toString
 	@Override
 	public String toString() {
-		return "Account [accountId=" + accountId + ", balance=" + balance + ", customerId=" + customerId
-				+ ", accountType=" + accountType + ", branchCode=" + branchCode + ", bank=" + bank + "]";
+		return "Pet [id=" + id + ", name=" + name + ", age=" + age + ", weight=" + weight + ", customerId=" + customerId
+				+ "]";
 	}
+	
 }
