@@ -5,16 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.cognixia.jump.springcloud.model.Account;
+import com.cognixia.jump.springcloud.model.Customer;
 
 @Service
 @FeignClient("account-service")
-public interface AccountService {
+public interface CustomerService {
 	
 	@GetMapping("/account/{accountId}")
-	public Account findByAccountId(Integer accountId);
+	public Customer findByCustomerId(Integer customerId);
 	
 	@PostMapping("/account")
-	public Account save(Account acct);
+	public Customer save(Customer cust);
 
 }
