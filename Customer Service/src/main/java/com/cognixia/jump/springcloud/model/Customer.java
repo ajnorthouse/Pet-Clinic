@@ -17,7 +17,7 @@ public class Customer implements Serializable {
 	//class variables
 	@Id
 	@Column(name="CUSTOMERID")
-	Integer customerID;
+	Integer customerId;
 	
 	@Column(name="NAME")
 	String name;
@@ -37,7 +37,7 @@ public class Customer implements Serializable {
 	
 	//constructors
 	public Customer() {
-		this.customerID = -1;
+		this.customerId = -1;
 		this.name = "N/A";
 		this.phoneNumber = "N/A";
 		this.emailAddress = "N/A";
@@ -45,8 +45,8 @@ public class Customer implements Serializable {
 		this.pets = new ArrayList<Pet>();
 	}
 	
-	public Customer(Integer customerID, String name, String phoneNumber, String emailAddress, String city) {
-		this.customerID = customerID;
+	public Customer(Integer customerId, String name, String phoneNumber, String emailAddress, String city) {
+		this.customerId = customerId;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
@@ -54,8 +54,8 @@ public class Customer implements Serializable {
 		this.pets = new ArrayList<Pet>();
 	}
 	
-	public Customer(Integer customerID, String name, String phoneNumber, String emailAddress, String city, List<Pet> pets) {
-		this.customerID = customerID;
+	public Customer(Integer customerId, String name, String phoneNumber, String emailAddress, String city, List<Pet> pets) {
+		this.customerId = customerId;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
@@ -68,8 +68,8 @@ public class Customer implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Integer getCustomerID() {
-		return customerID;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 	public String getName() {
 		return name;
@@ -89,8 +89,8 @@ public class Customer implements Serializable {
 
 	
 	//setters
-	public void setCustomerID(Integer customerID) {
-		this.customerID = customerID;
+	public void setCustomerID(Integer customerId) {
+		this.customerId = customerId;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -111,7 +111,7 @@ public class Customer implements Serializable {
 	//toString
 	@Override
 	public String toString() {
-		return "Customer [customerID=" + customerID + ", name=" + name + ", phoneNumber=" + phoneNumber + ", emailAddress="
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phoneNumber=" + phoneNumber + ", emailAddress="
 				+ emailAddress + ", city=" + city + ", pets=" + pets + "]";
 	}
 
