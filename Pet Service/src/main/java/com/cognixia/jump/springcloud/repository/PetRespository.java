@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.cognixia.jump.springcloud.model.Customer;
 
 @Repository
-public interface CustomerRespository extends JpaRepository<Customer, Integer>{
+public interface PetRespository extends JpaRepository<Customer, Integer>{
 	
 	Customer findByCustomerId(Integer customerId);
 
