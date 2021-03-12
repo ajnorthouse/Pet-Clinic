@@ -125,7 +125,7 @@ public class CustomerController {
 	
 	
 	
-	//UPDATE Customer
+	//UPDATE
 	@PutMapping("/update/customer")
 	public @ResponseBody String updateCustomer(@RequestBody Customer cust) {
 		
@@ -140,8 +140,7 @@ public class CustomerController {
 		}
 		
 	}
-	
-	//PATCH Customer details
+	//patch mapping and helpers:
 	@PatchMapping("customer")
 	public @ResponseBody String[] updateCustomer(@RequestBody Map<String, String> custuUpdate) {
 		// collect id from map and attempt to get matching Customer
@@ -221,4 +220,5 @@ public class CustomerController {
 		}
 		
 	}
+	
 }
