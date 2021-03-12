@@ -113,6 +113,4 @@ public class Customer implements Serializable {
 				+ emailAddress + ", city=" + city + ", pets=" + pets + "]";
 	}
 
-	
-
 }
