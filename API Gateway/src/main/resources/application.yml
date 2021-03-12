@@ -18,9 +18,9 @@ zuul:
   ignored-services: '*'
   prefix: /api
   routes:
-    account-service:
-      path: /accounts/**
-      service-id: account-service
     customer-service:
-      path: /customers/**
+      path: /customer/**
       service-id: customer-service
+    pet-service:
+      path: /pet/**
+      service-id: pet-service

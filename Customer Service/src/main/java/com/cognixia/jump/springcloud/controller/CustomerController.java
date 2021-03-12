@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.jump.springcloud.model.Pet;
 import com.cognixia.jump.springcloud.model.Customer;
 import com.cognixia.jump.springcloud.repository.CustomerRespository;
-import com.cognixia.jump.springcloud.service.AccountService;
+import com.cognixia.jump.springcloud.service.PetService;
 
 @RestController
 public class CustomerController {
@@ -22,7 +22,7 @@ public class CustomerController {
 	CustomerRespository repo;
 	
 	@Autowired
-	AccountService acctService;
+	PetService acctService;
 	
 	@GetMapping("/helloCustomer")
 	public String helloCustomer() {

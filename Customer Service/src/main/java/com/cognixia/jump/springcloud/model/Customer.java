@@ -11,26 +11,29 @@ import javax.persistence.Transient;
 
 @Entity
 public class Customer implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	//class variables
 	@Id
 	@Column(name="CUSTOMERID")
 	Integer id;
+	
 	@Column(name="NAME")
 	String name;
+	
 	@Column(name="PHONENUMBER")
 	String phoneNumber;
+	
 	@Column(name="EMAILADDRESS")
 	String emailAddress;
+	
 	@Column(name="CITY")
 	String city;
 	
 	//foreign entity
 	@Transient
 	List<Pet> pets;
-	
-	
 	
 	//constructors
 	public Customer() {
@@ -41,6 +44,7 @@ public class Customer implements Serializable {
 		this.city = "N/A";
 		this.pets = new ArrayList<Pet>();
 	}
+	
 	public Customer(Integer id, String name, String phoneNumber, String emailAddress, String city) {
 		super();
 		this.id = id;
@@ -50,6 +54,7 @@ public class Customer implements Serializable {
 		this.city = city;
 		this.pets = new ArrayList<Pet>();
 	}
+	
 	public Customer(Integer id, String name, String phoneNumber, String emailAddress, String city, List<Pet> pets) {
 		super();
 		this.id = id;
@@ -105,14 +110,11 @@ public class Customer implements Serializable {
 		this.pets = pets;
 	}
 	
-	
 	//toString
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", emailAddress="
 				+ emailAddress + ", city=" + city + ", pets=" + pets + "]";
 	}
-
-	
 
 }
