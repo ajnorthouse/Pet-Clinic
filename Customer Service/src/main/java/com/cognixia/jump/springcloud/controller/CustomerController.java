@@ -68,13 +68,66 @@ public class CustomerController {
 	public List<Customer> getAllCustomer() {
 		return repo.findAll();
 	}
-	//TODO: implement finding all customers 
-	//TODO: implement finding customer by Id
-	//TODO: implement finding customer by name
-	//TODO: implement finding customer by phone number
-	//TODO: implement finding customer by email address
-	//TODO: implement finding customer by city
-	//TODO: implement return all pets by customer id
+	@GetMapping("/customer/{id}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
+		Optional<Customer> found = repo.findById(id);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	}
+	@GetMapping("/customer/name/{name}")
+	public ResponseEntity<Customer> getCustomerByName(@PathVariable String name) {
+		Optional<Customer> found = repo.findByName(name);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	}
+	@GetMapping("/customer/phone/{phone}")
+	public ResponseEntity<Customer> getCustomerByPhoneNumber(@PathVariable String phone) {
+		Optional<Customer> found = repo.findByPhoneNumber(phone);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	}
+	@GetMapping("/customer/email/{email}")
+	public ResponseEntity<Customer> getCustomerByEmailAddress(@PathVariable String email) {
+		Optional<Customer> found = repo.findByEmailAddress(email);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	}
+	@GetMapping("/customer/city/{city}")
+	public ResponseEntity<Customer> getCustomerByCity(@PathVariable String city) {
+		Optional<Customer> found = repo.findByCity(city);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new Customer(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get(), HttpStatus.OK);
+	}
+	@GetMapping("/customer/{id}/pets")
+	public ResponseEntity<List<Pet>> getCustomerPetsById(@PathVariable Integer id) {
+		Optional<Customer> found = repo.findById(id);
+		
+		if (found.isEmpty()) {
+			return new ResponseEntity<>(new ArrayList<Pet>(), HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(found.get().getPets(), HttpStatus.OK);
+	}
 	
 	
 	
