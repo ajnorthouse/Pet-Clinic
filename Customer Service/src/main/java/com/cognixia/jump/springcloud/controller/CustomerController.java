@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,6 +92,18 @@ public class CustomerController {
 	}
 	
 	//DELETE
-	//TODO: implement delete customer by id
-	
+	@DeleteMapping("/delete/customer/{id}")
+	public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
+		
+		Optional<Customer> found = repo.findById((int) id);
+		
+		if(found.isPresent()) {
+			repo.deleteById((int) id);
+			return ResponseEntity.status(200).body("Deleted customer with id = " + id);
+		}
+		else {
+			return ResponseEntity.status(400).body("Customer with id = " + id + " not found.");
+		}
+		
+	}
 }
